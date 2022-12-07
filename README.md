@@ -1,91 +1,33 @@
-# 
+## How to run
 
-## Model
-www.msaez.io/#/storming/8d1f1fe95438e5ebee6b9d572b19b1b0
+- Run axon server and mysql firstly
 
-## Before Running Services
-### Make sure there is a Kafka server running
 ```
-cd kafka
+cd infra
 docker-compose up
 ```
-- Check the Kafka messages:
-```
-cd kafka
-docker-compose exec -it kafka /bin/bash
-cd /bin
-./kafka-console-consumer --bootstrap-server localhost:9092 --topic
-```
 
-## Run the backend micro-services
-See the README.md files inside the each microservices directory:
+## Build common API & Run each service
 
-- Food Delivery App
-- Restaurant
-- Payment
-- Customer
+'''
+cd common-api
+mvn install
+cd ..
 
-
-## Run API Gateway (Spring Gateway)
-```
-cd gateway
+cd Food Delivery App
 mvn spring-boot:run
-```
+cd ..
 
-## Test by API
-- Food Delivery App
-```
- http :8088/orders id="id" order_id="order_id" menu_id="menu_id" quantity="quantity" store_id="store_id" 
-```
-- Restaurant
-```
- http :8088/orderManagements id="id" order_id="order_id" menu_id="menu_id" order_status="order_status" delivery_address="delivery_address" rider_id="rider_id" delivery_status="delivery_status" 
-```
-- Payment
-```
- http :8088/paymentHistories id="id" orderId="orderId" amount="amount" 
-```
-- Customer
-```
-```
+cd Restaurant
+mvn spring-boot:run
+cd ..
 
+cd Payment
+mvn spring-boot:run
+cd ..
 
-## Run the frontend
-```
-cd frontend
-npm i
-npm run serve
-```
+cd Customer
+mvn spring-boot:run
+cd ..
 
-## Test by UI
-Open a browser to localhost:8088
-
-## Required Utilities
-
-- httpie (alternative for curl / POSTMAN) and network utils
-```
-sudo apt-get update
-sudo apt-get install net-tools
-sudo apt install iputils-ping
-pip install httpie
-```
-
-- kubernetes utilities (kubectl)
-```
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-```
-
-- aws cli (aws)
-```
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-```
-
-- eksctl 
-```
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-sudo mv /tmp/eksctl /usr/local/bin
-```
-
+'''

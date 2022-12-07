@@ -37,6 +37,7 @@ export default new Router({
                 component: OrderDetail
             },
 
+
             {
                 path: '/menus',
                 name: 'MenuView',
@@ -47,6 +48,7 @@ export default new Router({
                 name: 'MenuViewDetail',
                 component: MenuViewDetail
             },
+
             {
                 path: '/consolidatedOrderStatuses',
                 name: 'ConsolidatedOrderStatusView',
@@ -67,6 +69,7 @@ export default new Router({
                 name: 'OrderManagementDetail',
                 component: OrderManagementDetail
             },
+
 
             {
                 path: '/orderDetailsViews',
